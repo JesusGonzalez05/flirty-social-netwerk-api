@@ -19,9 +19,10 @@ const userSchema = new Schema (
         },
         thoughts: [
             {
-                // reference the thought object id 
-            }
-        ],
+              type: Schema.Types.ObjectId,
+              ref: 'Thought',
+            },
+          ],
         friends: [
             {
                 // reference the user object id 
