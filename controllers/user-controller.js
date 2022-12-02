@@ -47,11 +47,51 @@ deleteUser(req, res) {
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
-          : Application.deleteMany({ _id: { $in: user.applications } })
+          : User.deleteMany({ _id: { $in: user.applications } })
       )
-      .then(() => res.json({ message: 'User and associated apps deleted!' }))
+      .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
+// add a new friend
+addFriend(req, res) {
+     User.create(req.body)
+      .then((post) => {
+        return User.findOneAndUpdate(
+        { _id: req.body.userId },
+        { $addToSet: { posts: post._id } },
+        { new: true }
+        );
+    })
+      .then((user) =>
+        !user
+        ? res.status(404).json({ message: 'No friends with that Id' })
+        : res.json('Youre friends 🎉')
+          )
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+          });
+      },
+// delete a friend
+removeFriend(req, res) {
+    User.create(req.body)
+     .then((post) => {
+       return User.findOneAndUpdate(
+       { _id: req.body.userId },
+       { $pull: { posts: post._id } },
+       { new: true }
+       );
+   })
+     .then((user) =>
+       !user
+       ? res.status(404).json({ message: 'No friends with that Id' })
+       : res.json('Friend removed')
+         )
+         .catch((err) => {
+           console.log(err);
+           res.status(500).json(err);
+         });
+     },
 };
 
 module.exports = userController;
