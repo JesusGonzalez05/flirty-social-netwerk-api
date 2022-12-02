@@ -37,12 +37,5 @@ const userSchema = new Schema (
 
 );
 
-// Create a virtual property for friend count
-// postSchema.virtual('commentCount').get(function () {
-//     return this.comments.length;
-//   });
-
-// Initialize our Post model
-const User = model('user', userSchema);
 
 module.exports = User;
