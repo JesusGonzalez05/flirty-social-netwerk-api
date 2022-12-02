@@ -15,7 +15,7 @@ const {
 // /api/users
 router.route('/')
 .get(getUsers)
-.get(getSingleUser);
+.put(createUser);
 
 // /api/users/:userId
 router.route('/:userId')
