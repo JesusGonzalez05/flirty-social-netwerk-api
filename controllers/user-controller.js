@@ -1,6 +1,6 @@
-const { User } = require('../models/User');
+const { User } = require('../models');
 
-const userController = {
+module.exports = {
 // get all users
 getUsers(req, res) {
     User.find()
@@ -93,5 +93,3 @@ removeFriend(req, res) {
          });
      },
 };
-
-module.exports = userController;
